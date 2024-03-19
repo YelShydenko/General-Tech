@@ -1,0 +1,72 @@
+Table users{
+  user_id int
+  username varchar
+  country varchar
+  friends_quantity int
+  created_at timestamp
+}
+
+Table friendship{
+  user_id_1 int
+  user_id_2 int
+  created_at timestamp
+}
+
+Table publications{
+  publication_id int
+  user_id int
+  publication_content text
+  reactions_quantity int
+  comments_quatity int
+  created_at timestamp
+}
+
+Table comments{
+  comment_id int
+  publication_id int
+  comment_content text
+  user_id int
+  created_at timestamp
+}
+
+Table reactions{
+  reaction_id int
+  publication_id int
+  post_evaluation int
+  user_id int
+  created_at timestamp
+}
+
+Table chat{
+  chat_id int
+  user_id_1 int
+  user_id_2 int
+  messages_quantity int
+  created_at timestamp
+}
+
+Table messages{
+  message_id int
+  chat_id int
+  user_id int
+  message_text text
+  created_at timestamp
+}
+
+Ref: "users"."user_id" < "friendship"."user_id_1"
+
+Ref: "users"."user_id" < "chat"."user_id_1"
+
+Ref: "users"."user_id" < "publications"."user_id"
+
+Ref: "users"."user_id" < "comments"."user_id"
+
+Ref: "users"."user_id" < "reactions"."user_id"
+
+Ref: "users"."user_id" < "messages"."user_id"
+
+Ref: "chat"."chat_id" < "messages"."chat_id"
+
+Ref: "publications"."publication_id" < "comments"."publication_id"
+
+Ref: "publications"."publication_id" < "reactions"."publication_id"

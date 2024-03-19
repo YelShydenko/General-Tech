@@ -1,0 +1,63 @@
+Table users{
+    user_id int
+    username varchar
+    created_at timestamp
+}
+
+Table videos{
+    video_id int
+    user_id int
+    video_name varchar
+    video_long int
+    created_at timestamp
+}
+
+Table reactions{
+    reaction_id int
+    video_id int
+    user_id int
+    quantity int
+    reaction bool
+    created_at timestamp
+}
+
+Table comments{
+    comments_id int
+    video_id int
+    user_id int
+    value text
+    created_at timestamp
+}
+
+Table playlists{ 
+    playlist_id int
+    user_id int
+    playlist_name varchar
+    playlist_categoty varchar
+    playlist_long int
+    video_quantity int
+    created_at timestamp
+}
+
+Table playlist_video{
+    video_id int
+    playlist_id int
+    created_at timestamp
+}
+
+Ref: "users"."user_id" < "videos"."user_id"
+
+Ref: "videos"."video_id" < "reactions"."video_id"
+
+Ref: "videos"."video_id" < "comments"."video_id"
+
+Ref: "users"."user_id" < "playlists"."user_id"
+
+Ref: "users"."user_id" < "reactions"."user_id"
+
+Ref: "users"."user_id" < "comments"."user_id"
+
+Ref: "videos"."video_id" < "playlist_video"."video_id"
+
+Ref: "playlist_video"."playlist_id" < "playlists"."playlist_id"
+
