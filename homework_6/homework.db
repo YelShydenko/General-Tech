@@ -1,0 +1,69 @@
+Table users{
+  user_id int
+  username varchar
+  raiting int
+  created_at timestamp
+}
+
+Table game_sessions{
+  game_session_id int
+  black_user_id_1 int
+  white_user_id_2 int
+  chat_id int
+  location_id int
+  is_private true
+  winner_id int
+  created_at timestamp
+  finished_at timestamp
+}
+
+Table move{
+  figure_name varchar
+  game_session_id int
+  user_id int
+  move_sell_start int
+  move_sell_finish int
+}
+
+table map{
+  location_id int
+  location_name varchar
+  game_session_id int
+}
+
+Table chat{
+  chat_id int
+  game_session_id int
+  user_id_1 int
+  user_id_2 int
+  messages_quantity int
+  created_at timestamp
+}
+
+Table message{
+  message_id int
+  chat_id int
+  user_id int
+  message_content text
+  created_at timestamp
+}
+
+Ref: "users"."user_id" < "game_sessions"."black_user_id_1"
+
+Ref: "game_sessions"."game_session_id" < "map"."game_session_id"
+
+Ref: "game_sessions"."game_session_id" < "move"."game_session_id"
+
+Ref: "game_sessions"."game_session_id" < "chat"."game_session_id"
+
+Ref: "message"."chat_id" < "chat"."chat_id"
+
+Ref: "users"."user_id" < "message"."user_id"
+
+Ref: "users"."user_id" < "move"."user_id"
+
+Ref: "users"."user_id" < "chat"."user_id_1"
+
+Ref: "game_sessions"."chat_id" < "chat"."chat_id"
+
+Ref: "game_sessions"."location_id" < "map"."location_id"

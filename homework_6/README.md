@@ -1,0 +1,1 @@
+[Online Chess](https://dbdiagram.io/d/Online_ches-65fa01c6ae072629ce714ecd)
