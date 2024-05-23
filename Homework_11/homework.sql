@@ -1,20 +1,23 @@
 
 -- Создать таблицу друзей с использованием механизма валидации данных в SQL
 
-CREATE TABLE friends (
-    friend_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    phone VARCHAR(15) NOT NULL,
-    CHECK (LENGTH(phone) >= 10)
+CREATE TABLE friendship (
+    friendship_id INT AUTO_INCREMENT PRIMARY KEY,
+    user1_id int NOT NULL,
+    user2_id int NOT NULL,
+    created_at timestamp not null default current_timestamp,
+    foreign key(user1_id) references users(id),
+    foreign key(user2_id) references users(id)
     )
+
 
 -- Добавить в таблицу друзей несколько записей
 
-INSERT INTO friends (name, email, phone) VALUES
-('Harry Potter', 'harrythebest@gmail.com', '1234567890'),
-('Hermione Granger', 'smartygranger@gmail.com', '0987654321'),
-('Ron Weasley', 'rweasley1980@gmail.com', '4654824872');
+INSERT INTO friendship (user1_id, user2_id) VALUES
+(1, 3),
+(1, 2),
+(2, 3),
+(3, 4)
 
 -- Вывести сумму всех транзакций отдельно по каждой валюте (в упорядоченном виде)
 
